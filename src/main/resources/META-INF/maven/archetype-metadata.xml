@@ -1,0 +1,75 @@
+<archetype-descriptor
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0
+        http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+        xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        name="bonitasoft-actorfilter-archetype">
+    <requiredProperties>
+    	<requiredProperty key="name">
+    	   <validationRegex>^[a-zA-Z0-9\-]+$</validationRegex>
+    	</requiredProperty>
+    	<requiredProperty key="className">
+           <validationRegex>^[a-zA-Z_$][a-zA-Z\d_$]+$</validationRegex>
+        </requiredProperty>
+    	<requiredProperty key="bonitaVersion"></requiredProperty>
+    	<requiredProperty key="language">
+    	   <validationRegex>^java$|^groovy$</validationRegex> <!-- ADD KOTLIN IN THE REGEX WHEN RDY -->
+    	</requiredProperty>
+    	<requiredProperty key="wrapper"> 
+    	   <defaultValue>true</defaultValue>
+    	</requiredProperty>
+    </requiredProperties>
+    
+    <fileSets>
+        <fileSet filtered="true" packaged="true">
+            <directory>src/main/java</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+            <directory>src/test/java</directory>
+        </fileSet>
+        
+        <fileSet filtered="true" packaged="true">
+            <directory>src/main/groovy</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+            <directory>src/test/groovy</directory>
+        </fileSet>
+        
+        <fileSet filtered="true" packaged="true">
+            <directory>src/main/kotlin</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+            <directory>src/test/kotlin</directory>
+        </fileSet>
+        
+        <fileSet filtered="true">
+            <directory>src/main/resources</directory>
+            <excludes>
+            	<exclude>icon.png</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <includes>
+            	<include>icon.png</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>schemas</directory>
+        </fileSet>
+        <fileSet>
+            <directory/>
+            <includes>
+                <include>README.md</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="true">
+        	<directory/>
+        	<includes>
+        		<include>groovy-pom.xml</include>
+        		<include>kotlin-pom.xml</include>
+        		<include>assembly.xml</include>
+        	</includes>
+        </fileSet>
+    </fileSets>
+</archetype-descriptor>
