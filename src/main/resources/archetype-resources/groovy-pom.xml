@@ -110,14 +110,13 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
 	                <execution>
-	                    <id>all</id>
 	                    <phase>package</phase>
 	                    <goals>
 	                        <goal>single</goal>
 	                    </goals>
 	                    <configuration>
 	                        <descriptor>${basedir}/assembly.xml</descriptor>
-	                        <appendAssemblyId>true</appendAssemblyId>
+	                        <appendAssemblyId>false</appendAssemblyId>
 	                    </configuration>
 	                </execution>
                 </executions>
