@@ -9,9 +9,9 @@
     </parent>
  
     <groupId>com.company.bonitasoft</groupId>
-    <artifactId>actorfilter-test</artifactId>
+    <artifactId>actorfilter-java-test</artifactId>
     <version>1.0.0</version>
-    <name>actorfilter-test</name>
+    <name>actorfilter-java-test</name>
     <packaging>jar</packaging>
     
     <properties>

@@ -18,7 +18,7 @@ public class ${className} extends AbstractUserFilter {
     static final String MAXIMUM_WORKLOAD_INPUT = "maximumWorkload";
 
     /**
-     * Perform validation on the inputs defined on the actorfilter definition (src/main/resources/${name}.def)
+     * Perform validation on the inputs defined on the actorfilter definition (src/main/resources/${artifactId}.def)
      * You should: 
      * - validate that mandatory inputs are presents
      * - validate that the content of the inputs is coherent with your use case (e.g: validate that a date is / isn't in the past ...)
