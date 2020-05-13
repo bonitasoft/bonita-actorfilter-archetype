@@ -73,8 +73,7 @@
                 <configuration>
                     <ignoreEOLStyle>true</ignoreEOLStyle>
                     <skip>${skipTests}</skip>
-                    <noLog>false</noLog>
-                    
+                    <noLog>true</noLog>
                 </configuration>
                 <executions>
                     <execution>
