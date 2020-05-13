@@ -35,15 +35,14 @@ You'll then have to specify interactively the properties of your project:
 
 - **groupId:** the group id of your actor filter
 - **artifactId:** the artifact id of your actor filter
+	- Must match the following regex: `^[a-zA-Z0-9\-]+$`
+	- Example: _my-actor-filter_
 - **version:** the version of your actor filter _(default value: 1.0-SNAPSHOT)_
 - **package** the package in which the actor filter source files will be created _(default value: the group id of the actor filter)_
 - **bonitaVersion:** the targeted Bonita version
 - **className:** the class name of your actor filter 
     - Must match the following regex: `^[a-zA-Z_$][a-zA-Z\d_$]+$` (A Java classname valid identifier)
     - Example: _MyActorfilter1_
-- **name:** the name of your extension
-    - Must match the following regex: `^[a-zA-Z0-9\-]+$`
-    - Example: _myActorfilter-1_
 - **language**: the language used in the actor filter project. Available values:
     - java
     - groovy

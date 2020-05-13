@@ -24,7 +24,7 @@ class ${className}Test extends Specification {
 
     def should_throw_exception_if_mandatory_input_is_missing() {
         given: 'An actorfilter without input'
-        filter.setInputParameters(Collections.emptyMap());
+        filter.setInputParameters([:])
 
         when: 'Validating inputs'
         filter.validateInputParameters()
@@ -35,7 +35,7 @@ class ${className}Test extends Specification {
 
     def should_throw_exception_if_mandatory_input_is_not_positive_integer() {
         given: 'An actorfilter with a negative input'
-        filter.setInputParameters(['maximumWorkload':-1]);
+        filter.setInputParameters([(${className}.MAXIMUM_WORKLOAD_INPUT):-1])
 
         when: 'Validating inputs'
         filter.validateInputParameters()
@@ -46,7 +46,7 @@ class ${className}Test extends Specification {
 
     def should_throw_exception_if_mandatory_input_is_not_an_integer() {
         given: 'An actorfilter with a String input'
-        filter.setInputParameters(['maximumWorkload':'1']);
+        filter.setInputParameters([(${className}.MAXIMUM_WORKLOAD_INPUT):'1'])
 
         when: 'Validating inputs'
         filter.validateInputParameters()
@@ -63,7 +63,7 @@ class ${className}Test extends Specification {
         processApi.getNumberOfAssignedHumanTaskInstances(3L) >> 0L
 
         and: 'An actor filter with a valid maximum workload'
-        filter.setInputParameters(['maximumWorkload':'3']);
+        filter.setInputParameters([(${className}.MAXIMUM_WORKLOAD_INPUT):'3'])
 
         when: 'Applying filter to the existing users'
         def candidates = filter.filter("MyActor");
