@@ -46,6 +46,7 @@ You'll then have to specify interactively the properties of your project:
 - **language**: the language used in the actor filter project. Available values:
     - java
     - groovy
+    - kotlin
 - **wrapper** _(optional)_: install a [maven wrapper](https://github.com/takari/maven-wrapper). Available values: 
     - true _(default)_
     - false

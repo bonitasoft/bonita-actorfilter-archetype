@@ -1,4 +1,4 @@
-package ${package}
+package com.company.bonitasoft
 
 import java.util.Collections
 
@@ -12,9 +12,9 @@ import org.bonitasoft.engine.connector.EngineExecutionContext
 import org.junit.Before
 import org.junit.Test
 
-class ${className}Test {
+class MyKotlinActorfilterTest {
 
-    val filter = ${className}()
+    val filter = MyKotlinActorfilter()
     val apiAccessor = mockk<APIAccessor>()
     val processApi = mockk<ProcessAPI>()
     val executionContext = mockk<EngineExecutionContext>()
@@ -36,7 +36,7 @@ class ${className}Test {
     @Test(expected = ConnectorValidationException::class)
     fun should_throw_exception_if_mandatory_input_is_not_positive_integer() {
         val parameters = HashMap<String, Any>();
-        parameters.put(${className}.MAXIMUM_WORKLOAD_INPUT, -1)
+        parameters.put(MyKotlinActorfilter.MAXIMUM_WORKLOAD_INPUT, -1)
         filter.setInputParameters(parameters)
         filter.validateInputParameters()
     }
@@ -44,7 +44,7 @@ class ${className}Test {
     @Test(expected = ConnectorValidationException::class)
     fun should_throw_exception_if_mandatory_input_is_not_an_integer() {
         val parameters = HashMap<String, Any>();
-        parameters.put(${className}.MAXIMUM_WORKLOAD_INPUT, "1")
+        parameters.put(MyKotlinActorfilter.MAXIMUM_WORKLOAD_INPUT, "1")
         filter.setInputParameters(parameters)
         filter.validateInputParameters()
     }
@@ -57,7 +57,7 @@ class ${className}Test {
         every { processApi.getNumberOfAssignedHumanTaskInstances(3L) } returns 0L
 
         val parameters = HashMap<String, Any>();
-        parameters.put(${className}.MAXIMUM_WORKLOAD_INPUT, 3)
+        parameters.put(MyKotlinActorfilter.MAXIMUM_WORKLOAD_INPUT, 3)
         filter.setInputParameters(parameters)
 
         val candidates = filter.filter("MyActor")
