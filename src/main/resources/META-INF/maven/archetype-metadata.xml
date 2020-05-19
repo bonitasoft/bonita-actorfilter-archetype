@@ -16,7 +16,7 @@
     	<requiredProperty key="bonitaVersion">
     	</requiredProperty>
     	<requiredProperty key="language">
-    	   <validationRegex>^java$|^groovy$</validationRegex> <!-- ADD KOTLIN IN THE REGEX WHEN RDY -->
+    	   <validationRegex>^java$|^groovy$|^kotlin$</validationRegex>
     	</requiredProperty>
     	<requiredProperty key="wrapper"> 
     	   <defaultValue>true</defaultValue>

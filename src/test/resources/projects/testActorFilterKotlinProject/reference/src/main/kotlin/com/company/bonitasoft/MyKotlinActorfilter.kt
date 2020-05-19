@@ -1,4 +1,4 @@
-package ${package}
+package com.company.bonitasoft
 
 import java.util.logging.Logger
 
@@ -7,7 +7,7 @@ import org.bonitasoft.engine.connector.ConnectorValidationException
 import org.bonitasoft.engine.filter.AbstractUserFilter
 import org.bonitasoft.engine.api.APIAccessor
 
-class ${className} : AbstractUserFilter {
+class MyKotlinActorfilter : AbstractUserFilter {
 
     constructor() : super()
 
@@ -15,10 +15,10 @@ class ${className} : AbstractUserFilter {
         const val MAXIMUM_WORKLOAD_INPUT = "maximumWorkload"
     }
     
-    val logger = Logger.getLogger(${className}::class.java.name)
+    val logger = Logger.getLogger(MyKotlinActorfilter::class.java.name)
 
     /**
-     * Perform validation on the inputs defined on the actorfilter definition (src/main/resources/${artifactId}.def)
+     * Perform validation on the inputs defined on the actorfilter definition (src/main/resources/actorfilter-kotlin-test.def)
      * You should:
      * - validate that mandatory inputs are presents
      * - validate that the content of the inputs is coherent with your use case (e.g: validate that a date is / isn't in the past ...)

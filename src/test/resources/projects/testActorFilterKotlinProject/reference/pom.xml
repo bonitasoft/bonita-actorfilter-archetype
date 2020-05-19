@@ -8,14 +8,14 @@
         <version>1.0.0</version>
     </parent>
  
-    <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}</artifactId>
-    <version>${version}</version>
-    <name>${artifactId}</name>
+    <groupId>com.company.bonitasoft</groupId>
+    <artifactId>actorfilter-kotlin-test</artifactId>
+    <version>1.0.0</version>
+    <name>actorfilter-kotlin-test</name>
     <packaging>jar</packaging>
     
     <properties>
-        <bonita.engine.version>${bonitaVersion}</bonita.engine.version>
+        <bonita.engine.version>7.10.0</bonita.engine.version>
         <kotlin.version>1.3.70</kotlin.version>
         <mockk.version>1.10.0</mockk.version>
     </properties>   
