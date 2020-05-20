@@ -1,9 +1,9 @@
-## Bonita actor filter development
+# Bonita actor filter development
 
 The readme contains details on the content of the generated project, and how it should be used to develop and build a Bonita actor filter. More details are available in the documentation: [https://documentation.bonitasoft.com/](https://documentation.bonitasoft.com/).
 
-#### Connector definition
-A actor filter is first defined by its **definition**.  It is an XML file located in _src/main/resources/[actor_filter name].def_ by default.   
+## Definition
+A actor filter is first defined by its **definition**.  It is an XML file located in _src/main/resources/[artifactId].def_ by default.   
 A definition defines the inputs of the actor filter. It can be seen as a black box. Then, implementations of this definition can be created, they just need to respect the inputs contract of the definition.  
 The connector definition XSD is available in _schemas/connector-definition-descriptor.xsd_, you can import it in a IDE to get completion. 
 
@@ -32,7 +32,7 @@ Example:
   
 </definition:ConnectorDefinition>
 ```
-##### Actor filter Inputs
+## Actor filter Inputs
 
 The inputs of an actor filter are defined in the definition. Those inputs are valued by processes, and are retrieved by the implementation classes of the actor filter to execute the business logic.  
 A actor filter input: 
@@ -42,7 +42,7 @@ A actor filter input:
  - Has an optional default value
  - Can be mandatory 
 
-##### Pages and widgets
+## Pages and widgets
 A definition includes _pages_ and _widgets_.  Those elements define the UI that will appear in the Bonita Studio to configure the actor filter.  
 
  - A widget is bound to an input
@@ -69,7 +69,7 @@ Some widgets can require additional informations. For example, if you want to cr
 </widget>
 ```
 
-#### Actor filter implementation
+## Actor filter implementation
 
 An _actor filter implementation_ implements a definition. A definition defines a set of inputs, implementing a definition means use the provided inputs to create the expected list of users ids.  
 Several implementations can be created for a given definition.
@@ -78,7 +78,7 @@ An actor filter implementation is made of two elements:
 - An xml file used to explicit the definition implemented, the dependencies required and the name of the implementation class
 - A set of Java based classes, constituting the implementation sources
 
-##### Implementation XML file
+### Implementation XML file
 
 The implementation XML file is located in _src/main/resources/[actor filter name].impl_ by default.  
 The connector definition XSD is available in _schemas/connector-implementation-descriptor.xsd_, you can import it in a IDE to get completion. 
@@ -100,7 +100,7 @@ $Dependencies$
 </implementation:connectorImplementation>
 ```
 
-##### Implementation sources
+### Implementation sources
 
 The implementation sources contain all the logic of the actor filter:
 
@@ -111,7 +111,7 @@ The archetype offers the possibility to generate the default sources in Java, Gr
 
 The entry point of the implementation sources must extend the class _`org.bonitasoft.engine.filter.AbstractUserFilter`_.
 
-#### Build an actor filter project
+### Build an actor filter project
 
 An actor filter project is built using Maven, and especially the [maven assembly plugin](https://maven.apache.org/plugins/maven-assembly-plugin/).   
 The root _pom.xml_ file has the following parent: 
