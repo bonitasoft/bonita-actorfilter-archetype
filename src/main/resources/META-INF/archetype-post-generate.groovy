@@ -6,20 +6,18 @@ def logger = Logger.getLogger("Archetype post generate")
 
 Path projectPath = Paths.get(request.outputDirectory, request.artifactId)
 def language = request.properties.get('language')
-def name = request.properties.get('name')
 def installWrapper = Boolean.valueOf(request.properties.get('wrapper'))
 
 if (language == 'groovy') {
-    prepareGroovyProject(logger, projectPath, request.properties)
+    prepareGroovyProject(logger, projectPath)
 } else if (language == 'kotlin' ) {
-    prepareKotlinProject(logger, projectPath, request.properties)
+    prepareKotlinProject(logger, projectPath)
 } else if (language == 'java' ) {
-    prepareJavaProject(logger, projectPath, request.properties)
+    prepareJavaProject(logger, projectPath)
 } else {
     logger.warning("Language '$language' isn't supported. Only 'java' , 'kotlin' and 'groovy' are supported.")
-    prepareJavaProject(logger, projectPath, request.properties)
+    prepareJavaProject(logger, projectPath)
 }
-
 
 if(installWrapper) {
     installMavenWrapper(logger, projectPath)
@@ -32,7 +30,7 @@ def installMavenWrapper(Logger logger, Path projectPath) {
     println cmd.execute(null, projectPath.toFile()).text
 }
 
-def prepareKotlinProject(Logger logger, Path projectPath, Map properties) {
+def prepareKotlinProject(Logger logger, Path projectPath) {
     logger.info("Preparing kotlin project...")
     
     deleteJavaSources(projectPath)
@@ -43,7 +41,7 @@ def prepareKotlinProject(Logger logger, Path projectPath, Map properties) {
     kotlinPom.renameTo(defaultPom)
 }
 
-def prepareGroovyProject(Logger logger, Path projectPath, Map properties) {
+def prepareGroovyProject(Logger logger, Path projectPath) {
     logger.info("Preparing groovy project...")
     
     deleteJavaSources(projectPath)
@@ -54,7 +52,7 @@ def prepareGroovyProject(Logger logger, Path projectPath, Map properties) {
     groovyPom.renameTo(defaultPom)
 }
     
-def prepareJavaProject(Logger logger, Path projectPath, Map properties) {
+def prepareJavaProject(Logger logger, Path projectPath) {
     logger.info("Preparing java project...")
     
     deleteGroovySources(projectPath)
