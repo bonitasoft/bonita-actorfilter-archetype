@@ -1,6 +1,6 @@
 [![Actions Status](https://github.com/bonitasoft/bonita-actorfilter-archetype/workflows/Build/badge.svg)](https://github.com/bonitasoft/bonita-actorfilter-archetype/actions)
 
-[![Release](https://github.com/bonitasoft/bonita-actorfilter-archetype/workflows/Release/badge.svg)](https://github.com/bonitasoft/bonita-actorfilter-archetype/actions)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/bonitasoft/bonita-actorfilter-archetype?color=orange&include_prereleases)](https://github.com/bonitasoft/bonita-actorfilter-archetype/releases)
 
 ## Bonita Actor filter Archetype
 
@@ -54,3 +54,20 @@ You'll then have to specify interactively the properties of your project:
 A folder named _[your artifact id]_ is created, with your Bonita actor filter project, ready to use.
 
 ⚠️ You can avoid the interactive mode by specifying all properties of your project directly in the command line, but by doing that you'll bypass the validation performed on the properties content.
+
+### Release this project
+
+A github action is used to perform release : 
+[![Actions Status](https://github.com/bonitasoft/bonita-connector-archetype/workflows/Create%20release/badge.svg)](https://github.com/bonitasoft/bonita-connector-archetype/actions)
+
+- This action is triggered when a push is performed on a branch 'release-xxx'
+- It generates the changelog since the last release, creates the github tag and release with the changelog as description, and push the release on our nexus repository. 
+
+So, to release a new version of the project, you have to: 
+- Create a branch release-[version] on your local git repository
+- Update the version in the pom.xml (remove the -SNAPSHOT)
+- Push the branch
+
+⚠️ Make sur that the release branch is final before to push it. If you have to update something on the release branch after the push, then you must first:
+- Delete the tag and the release on github
+- Remove the artifact from our nexus repository 
