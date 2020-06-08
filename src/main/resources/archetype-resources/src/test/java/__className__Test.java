@@ -89,7 +89,9 @@ class ${className}Test {
         List<Long> candidates = filter.filter("MyActor");
 
         // Then
-        assertThat(candidates).containsExactly(1L, 3L);
+        assertThat(candidates).as("Only users with a workload below the maximum can be candidates.")
+                .containsExactly(1L, 3L);
+
     }
 
 }
