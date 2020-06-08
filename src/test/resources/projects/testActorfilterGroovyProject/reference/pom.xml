@@ -17,7 +17,7 @@
         <!-- Actor filter -->
         <definition-id>${project.artifactId}</definition-id>
         <definition-version>1.0</definition-version>
-        <impl-id>${connector-definition-id}-impl</impl-id>
+        <impl-id>${definition-id}-impl</impl-id>
         <impl-version>${project.version}</impl-version>
         <impl-main-class>com.company.bonitasoft.MyGroovyActorfilter</impl-main-class>
                 
