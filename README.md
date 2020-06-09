@@ -1,6 +1,6 @@
 [![Actions Status](https://github.com/bonitasoft/bonita-actorfilter-archetype/workflows/Build/badge.svg)](https://github.com/bonitasoft/bonita-actorfilter-archetype/actions)
-
-[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/bonitasoft/bonita-actorfilter-archetype?color=orange&include_prereleases)](https://github.com/bonitasoft/bonita-actorfilter-archetype/releases)
+[![GitHub release](https://img.shields.io/github/v/release/bonitasoft/bonita-actorfilter-archetype?color=blue&label=Release&include_prereleases)](https://github.com/bonitasoft/bonita-actorfilter-archetype/releases)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.bonitasoft.archetypes/bonita-actorfilter-archetype/badge.svg?color=orange)](https://maven-badges.herokuapp.com/maven-central/org.bonitasoft.archetypes/bonita-actorfilter-archetype)
 
 ## Bonita Actor filter Archetype
 
