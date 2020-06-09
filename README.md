@@ -3,22 +3,11 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.bonitasoft.archetypes/bonita-actorfilter-archetype/badge.svg?color=orange)](https://maven-badges.herokuapp.com/maven-central/org.bonitasoft.archetypes/bonita-actorfilter-archetype)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-yellow.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
-## Bonita Actor filter Archetype
+# Bonita Actor filter Archetype
 
 This project contains a maven archetype, which allow to easily setup a Bonita actor filter project.
 
-### Install the archetype
-The archetype has to be installed on your local maven repository (not available on maven central for now).
-
- 1. Clone this project
- 2. From a terminal, enter the following command at the root of the cloned project: 
-```
-./mvnw clean install
-```
-
-The archetype is now installed on your local maven repository, and is ready to be used.
-
-### Setup an extension project using the archetype 
+## Setup an extension project using the archetype 
 
  You can setup a Bonita actor filter project using the following command, from a terminal: 
  
@@ -56,13 +45,24 @@ A folder named _[your artifact id]_ is created, with your Bonita actor filter pr
 
 ⚠️ You can avoid the interactive mode by specifying all properties of your project directly in the command line, but by doing that you'll bypass the validation performed on the properties content.
 
-### Contributing
+## Building the archetype
+The archetype can be installed in your local maven repository.
+
+ 1. Clone this project
+ 2. From a terminal, enter the following command at the root of the cloned project: 
+```
+./mvnw clean install
+```
+
+The archetype is now installed on your local maven repository, and is ready to be used.
+
+## Contributing
 
 Please sign the contributor license agreement and read our [contribution guidelines](CONTRIBUTING.md) before to open a pull request. 
  
 <a href="https://cla-assistant.io/bonitasoft/bonita-actorfilter-archetype"><img src="https://cla-assistant.io/readme/badge/bonitasoft/bonita-actorfilter-archetype" alt="CLA assistant" /></a>
 
-### Release this project
+## Release this project
 
 A github action is used to perform release : 
 
