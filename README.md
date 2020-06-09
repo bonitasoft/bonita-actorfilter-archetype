@@ -64,6 +64,7 @@ Please sign the contributor license agreement and read our [contribution guideli
 ### Release this project
 
 A github action is used to perform release : 
+
 [![Actions Status](https://github.com/bonitasoft/bonita-actorfilter-archetype/workflows/Create%20release/badge.svg)](https://github.com/bonitasoft/bonita-actorfilter-archetype/actions)
 
 - This action is triggered when a push is performed on a branch 'release-xxx'
