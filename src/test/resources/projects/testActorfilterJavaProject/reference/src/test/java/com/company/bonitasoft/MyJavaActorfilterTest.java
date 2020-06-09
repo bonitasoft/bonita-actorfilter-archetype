@@ -1,98 +1,97 @@
 package com.company.bonitasoft;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.bonitasoft.engine.api.APIAccessor;
 import org.bonitasoft.engine.api.ProcessAPI;
 import org.bonitasoft.engine.connector.ConnectorValidationException;
 import org.bonitasoft.engine.connector.EngineExecutionContext;
 import org.bonitasoft.engine.filter.UserFilterException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
-public class MyJavaActorfilterTest {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import static com.company.bonitasoft.MyJavaActorfilter.MAXIMUM_WORKLOAD_INPUT;
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
+class MyJavaActorfilterTest {
+
+    @InjectMocks
     private MyJavaActorfilter filter;
-    @Mock
+
+    @Mock(lenient = true)
     private APIAccessor apiAccessor;
-    @Mock
+    @Mock(lenient = true)
     private ProcessAPI processApi;
-    @Mock
+
+    @Mock(lenient = true)
     private EngineExecutionContext executionContext;
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
-    @Before
-    public void setUp() throws Exception {
-        filter = new MyJavaActorfilter();
+    @BeforeEach
+    void setUp() {
         when(apiAccessor.getProcessAPI()).thenReturn(processApi);
-        filter.setAPIAccessor(apiAccessor);
-        filter.setExecutionContext(executionContext);
-    }
-    
-    @Test
-    public void should_throw_exception_if_mandatory_input_is_missing() throws ConnectorValidationException {
-        filter.setInputParameters(Collections.emptyMap());
-                
-        expectedException.expect(ConnectorValidationException.class);
-        
-        filter.validateInputParameters();
+        when(executionContext.getProcessDefinitionId()).thenReturn(1L);
     }
 
     @Test
-    public void should_throw_exception_if_mandatory_input_is_not_positive_integer() throws ConnectorValidationException {
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put(MyJavaActorfilter.MAXIMUM_WORKLOAD_INPUT, -1);
-        filter.setInputParameters(parameters);
-        
-        expectedException.expect(ConnectorValidationException.class);
-        
-        filter.validateInputParameters();
+    public void should_throw_exception_if_mandatory_input_is_missing() {
+        assertThrows(ConnectorValidationException.class, () ->
+                filter.validateInputParameters()
+        );
     }
 
     @Test
-    public void should_throw_exception_if_mandatory_input_is_not_an_integer() throws ConnectorValidationException {
+    public void should_throw_exception_if_mandatory_input_is_not_positive_integer() {
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put(MyJavaActorfilter.MAXIMUM_WORKLOAD_INPUT, "1");
+        parameters.put(MAXIMUM_WORKLOAD_INPUT, -1);
         filter.setInputParameters(parameters);
-        
-        expectedException.expect(ConnectorValidationException.class);
-        
-        filter.validateInputParameters();
+        assertThrows(ConnectorValidationException.class, () ->
+                filter.validateInputParameters()
+        );
+    }
+
+    @Test
+    public void should_throw_exception_if_mandatory_input_is_not_an_integer() {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put(MAXIMUM_WORKLOAD_INPUT, "1");
+        filter.setInputParameters(parameters);
+        assertThrows(ConnectorValidationException.class, () ->
+                filter.validateInputParameters()
+        );
     }
 
     @Test
     public void should_return_a_list_of_candidates() throws UserFilterException {
-        when(processApi.getUserIdsForActor(Mockito.anyLong(), Mockito.eq("MyActor"), Mockito.eq(0),
-                Mockito.eq(Integer.MAX_VALUE)))
-                        .thenReturn(Arrays.asList(1L, 2L, 3L));
+        // Given
+        when(processApi.getUserIdsForActor(anyLong(), eq("MyActor"), eq(0), eq(Integer.MAX_VALUE)))
+                .thenReturn(asList(1L, 2L, 3L));
         when(processApi.getNumberOfAssignedHumanTaskInstances(1L)).thenReturn(2L);
         when(processApi.getNumberOfAssignedHumanTaskInstances(2L)).thenReturn(3L);
         when(processApi.getNumberOfAssignedHumanTaskInstances(3L)).thenReturn(0L);
+
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put(MyJavaActorfilter.MAXIMUM_WORKLOAD_INPUT, 3);
+        parameters.put(MAXIMUM_WORKLOAD_INPUT, 3);
         filter.setInputParameters(parameters);
-        
+
+        // When
         List<Long> candidates = filter.filter("MyActor");
-        
-        assertTrue("Only users with a workload below the maximum can be candidates.",
-                candidates.contains(1L)
-                && candidates.contains(3L)
-                && !candidates.contains(2L));
+
+        // Then
+        assertThat(candidates).as("Only users with a workload below the maximum can be candidates.")
+                .containsExactly(1L, 3L);
+
     }
 
 }

@@ -18,7 +18,7 @@
         <!-- Actor filter -->
         <definition-id>${project.artifactId}</definition-id>
         <definition-version>1.0</definition-version>
-        <impl-id>${connector-definition-id}-impl</impl-id>
+        <impl-id>${definition-id}-impl</impl-id>
         <impl-version>${project.version}</impl-version>
         <impl-main-class>${package}.${className}</impl-main-class>
 
@@ -26,8 +26,11 @@
         <bonita.engine.version>${bonitaVersion}</bonita.engine.version>
 
         <!-- Tests -->
-        <junit.version>4.12</junit.version>
+        <junit-jupiter-engine.version>5.6.2</junit-jupiter-engine.version>
+        <junit-platform-runner.version>1.6.2</junit-platform-runner.version>
+        <assertj-core.version>3.16.1</assertj-core.version>
         <mockk.version>1.10.0</mockk.version>
+        <logback-classic.version>1.2.3</logback-classic.version>
 
         <!-- Maven plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -55,19 +58,38 @@
             <version>${kotlin.version}</version>
         </dependency>
 
-        <!-- Test -->
+        <!-- Tests -->
         <dependency>
-            <artifactId>junit</artifactId>
-            <groupId>junit</groupId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter-engine.version}</version>
             <scope>test</scope>
         </dependency>
-       	<dependency>
-		    <groupId>io.mockk</groupId>
-		    <artifactId>mockk</artifactId>
-		    <version>${mockk.version}</version>
-		    <scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>${junit-platform-runner.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.mockk</groupId>
+            <artifactId>mockk</artifactId>
+            <version>${mockk.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     
     <build>
