@@ -25,7 +25,7 @@ The archetype is now installed on your local maven repository, and is ready to b
  _Make sure that you do not launch the command from an existing maven project._
  
 ```
-mvn archetype:generate -DarchetypeGroupId=org.bonitasoft.archetypes -DarchetypeArtifactId=bonita-actorfilter-archetype -DarchetypeVersion=1.0.0-SNAPSHOT
+mvn archetype:generate -DarchetypeGroupId=org.bonitasoft.archetypes -DarchetypeArtifactId=bonita-actorfilter-archetype
 ```
 
 - **archetypeGroupId:** the group id of the actor filter archetype.
