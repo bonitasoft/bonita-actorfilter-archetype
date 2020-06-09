@@ -55,6 +55,12 @@ A folder named _[your artifact id]_ is created, with your Bonita actor filter pr
 
 ⚠️ You can avoid the interactive mode by specifying all properties of your project directly in the command line, but by doing that you'll bypass the validation performed on the properties content.
 
+### Contributing
+
+Please sign the contributor license agreement and read our [contribution guidelines](CONTRIBUTING.md) before to open a pull request. 
+ 
+<a href="https://cla-assistant.io/bonitasoft/bonita-actorfilter-archetype"><img src="https://cla-assistant.io/readme/badge/bonitasoft/bonita-actorfilter-archetype" alt="CLA assistant" /></a>
+
 ### Release this project
 
 A github action is used to perform release : 
