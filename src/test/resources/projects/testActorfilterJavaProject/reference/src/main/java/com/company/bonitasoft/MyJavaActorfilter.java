@@ -41,8 +41,8 @@ public class MyJavaActorfilter extends AbstractUserFilter {
 
     /**
      * @return a list of {@link User} id that are the candidates to execute the task where this filter is defined. 
-     * If the result contains a unique user, the task will automaticaly be assigned.
-     * @see AbstractUserFilter.shouldAutoAssignTaskIfSingleResult
+     * If the result contains a unique user, the task will automatically be assigned.
+     * @see AbstractUserFilter#shouldAutoAssignTaskIfSingleResult()
      */
     @Override
     public List<Long> filter(String actorName) throws UserFilterException {
