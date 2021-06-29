@@ -1,12 +1,11 @@
-#set( $after713 = $bonitaVersion.matches('7.(1[3-9]|[2-9][0-9]).*') || $bonitaVersion.matches('[8-99].[0-9]+.*') )
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
-    <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}</artifactId>
-    <version>${version}</version>
-    <name>${artifactId}</name>
+    <groupId>com.company.bonitasoft</groupId>
+    <artifactId>actorfilter-kotlin-test</artifactId>
+    <version>1.0.0</version>
+    <name>actorfilter-kotlin-test</name>
     <packaging>jar</packaging>
     
     <properties>
@@ -20,10 +19,10 @@
         <definition-version>1.0.0</definition-version>
         <impl-id>${definition-id}-impl</impl-id>
         <impl-version>${project.version}</impl-version>
-        <impl-main-class>${package}.${className}</impl-main-class>
+        <impl-main-class>com.company.bonitasoft.MyKotlinActorfilter</impl-main-class>
 
         <!-- Bonita -->
-        <bonita-runtime.version>${bonitaVersion}</bonita-runtime.version>
+        <bonita-runtime.version>7.13.0</bonita-runtime.version>
 
         <!-- Tests -->
         <junit-jupiter-engine.version>5.7.0</junit-jupiter-engine.version>
@@ -39,7 +38,7 @@
         <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
     </properties>
 
-#if( $after713 )    <dependencyManagement>
+    <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.bonitasoft.runtime</groupId>
@@ -51,15 +50,11 @@
         </dependencies>
     </dependencyManagement>
 
-#end
     <dependencies>
         <!-- Bonita -->
         <dependency>
             <artifactId>bonita-common</artifactId>
             <groupId>org.bonitasoft.engine</groupId>
-#if ( not ( $after713 ) )
-            <version>${bonita-runtime.version}</version>
-#end
             <scope>provided</scope>
         </dependency>
 
