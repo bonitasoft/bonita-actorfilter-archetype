@@ -5,26 +5,36 @@ import java.util.logging.Logger
 def logger = Logger.getLogger("Archetype post generate")
 
 Path projectPath = Paths.get(request.outputDirectory, request.artifactId)
-def language = request.properties.get('language')
-def installWrapper = Boolean.valueOf(request.properties.get('wrapper'))
+def bonitaVersion = request.properties.get("bonitaVersion")
+def language = request.properties.get("language")
+def installWrapper = Boolean.valueOf(request.properties.get("wrapper"))
 
-if (language == 'groovy') {
+if (language == "groovy") {
     prepareGroovyProject(logger, projectPath)
-} else if (language == 'kotlin' ) {
+} else if (language == "kotlin" ){
     prepareKotlinProject(logger, projectPath)
-} else if (language == 'java' ) {
+}else if (language == "java" ){
     prepareJavaProject(logger, projectPath)
 } else {
     logger.warning("Language '$language' isn't supported. Only 'java' , 'kotlin' and 'groovy' are supported.")
     prepareJavaProject(logger, projectPath)
 }
 
+if(bonitaVersion ==~ /7.(1[3-9]|[2-9][0-9]).*/ || bonitaVersion ==~ /[8-99].[0-9]+.*/ ) {
+    removeAssembly(projectPath)
+}
+
+
 if(installWrapper) {
     installMavenWrapper(logger, projectPath)
 }
 
+def removeAssembly(Path projectPath) {
+    projectPath.resolve("src/assembly").toFile().deleteDir()
+}
+
 def installMavenWrapper(Logger logger, Path projectPath) {
-	def wrapperCommand = 'mvn -N io.takari:maven:0.7.7:wrapper'
+    def wrapperCommand = 'mvn -N io.takari:maven:0.7.7:wrapper'
     def cmd = System.properties['os.name'].toLowerCase().contains('windows') ? "cmd /c $wrapperCommand" : wrapperCommand
     logger.info("Installing maven wrapper... ($cmd)")
     println cmd.execute(null, projectPath.toFile()).text

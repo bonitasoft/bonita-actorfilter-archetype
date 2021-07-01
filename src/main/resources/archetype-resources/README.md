@@ -113,22 +113,20 @@ The entry point of the implementation sources must extend the class _`org.bonita
 
 ### Build an actor filter project
 
-An actor filter project is built using Maven, and especially the [maven assembly plugin](https://maven.apache.org/plugins/maven-assembly-plugin/).   
-The root _pom.xml_ file has the following parent: 
-```xml
-<parent>
-    <groupId>org.bonitasoft.connectors</groupId>
-    <artifactId>bonita-connectors</artifactId>
-    <version>1.0.0</version>
-</parent>
-```
-This parent contains the logic that make the replacements in the implementation xml file at build time.
-
-By default, a zip archives is built containing all the definitions and implementations found in the project.
-By importing this archive in a Bonita Studio you will import all the definitions and implementations created in the project
- 
-To build the actor filter project, type the following command at the root of the project : 
+To build project, type the following command at the root of the project : 
 ```
 ./mvnw clean install
 ```
+
+##### Before 7.13.0 (2021.2)
+
+This project is built using Maven, and especially the [maven assembly plugin](https://maven.apache.org/plugins/maven-assembly-plugin/).   
+
+By default, a zip archives is built containing all the definitions and implementations found in the project.
+By importing this archive in a Bonita Studio you will import all the definitions and implementations created in the project
+
 The built archive can be found in here `target/[artifact id]-[artifact version].zip` after the build.
+
+##### Since 7.13.0 (2021.2)
+
+Now that the Bonita project is a Maven project, the assembly is not used anymore. You can just add this actor filter as dependency in your Bonita project. Either using its Maven coordinates (be careful that the artifact must be published on a remote repository in order to be consumed) or by importing the built archive `target/[artifact id]-[artifact version].jar` using the Studio extension view.
