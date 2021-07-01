@@ -22,7 +22,7 @@
         <impl-main-class>com.company.bonitasoft.MyGroovyActorfilter</impl-main-class>
                 
         <!-- Bonita -->
-        <bonita.engine.version>7.10.0</bonita.engine.version>
+        <bonita-runtime.version>7.10.0</bonita-runtime.version>
         <groovy.version>2.4.21</groovy.version>
         
         <!-- Test -->
@@ -40,13 +40,13 @@
         <groovy-eclipse-compiler.version>3.7.0</groovy-eclipse-compiler.version>
         <groovy-eclipse-batch.version>2.4.21-01</groovy-eclipse-batch.version>
     </properties>
-    
+
     <dependencies>
     	<!-- Bonita -->
         <dependency>
             <artifactId>bonita-common</artifactId>
             <groupId>org.bonitasoft.engine</groupId>
-            <version>${bonita.engine.version}</version>
+            <version>${bonita-runtime.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -142,13 +142,8 @@
                     <dependencies>
                         <dependency>
                             <groupId>org.codehaus.groovy</groupId>
-                            <artifactId>groovy</artifactId>
-                            <version>${groovy.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.codehaus.groovy</groupId>
                             <artifactId>groovy-xml</artifactId>
-                            <version>${groovy.version}</version>
+                            <version>3.0.8</version>
                         </dependency>
                     </dependencies>
                 </plugin>
