@@ -113,17 +113,18 @@ The entry point of the implementation sources must extend the class _`org.bonita
 
 ### Build an actor filter project
 
+To build project, type the following command at the root of the project : 
+```
+./mvnw clean install
+```
+
 ##### Before 7.13.0 (2021.2)
 
-A actor filter project is built using Maven, and especially the [maven assembly plugin](https://maven.apache.org/plugins/maven-assembly-plugin/).   
+This project is built using Maven, and especially the [maven assembly plugin](https://maven.apache.org/plugins/maven-assembly-plugin/).   
 
 By default, a zip archives is built containing all the definitions and implementations found in the project.
 By importing this archive in a Bonita Studio you will import all the definitions and implementations created in the project
 
-To build the connector project, type the following command at the root of the project : 
-```
-./mvnw clean install
-```
 The built archive can be found in here `target/[artifact id]-[artifact version].zip` after the build.
 
 ##### Since 7.13.0 (2021.2)
