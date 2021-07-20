@@ -123,7 +123,7 @@ If you want to build a single zip assembly containing a specific implementation 
 
 ### Build the project
 
-To build the project by typing the following command at the root of the project:
+Build the project by typing the following command at the root of the project:
  
 ```
 ./mvnw clean install
