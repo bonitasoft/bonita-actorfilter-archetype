@@ -69,6 +69,10 @@ Some widgets can require additional informations. For example, if you want to cr
 </widget>
 ```
 
+### Add multiple definitions
+
+To add a new definition create a `.def` file in the `src/main/resources-filtered/` folder. They will be added to `all` zip archive at build time. It is recommended to use the maven properties for definition id and version.
+
 ## Actor filter implementation
 
 An _actor filter implementation_ implements a definition. A definition defines a set of inputs, implementing a definition means use the provided inputs to create the expected list of users ids.  
@@ -111,22 +115,32 @@ The archetype offers the possibility to generate the default sources in Java, Gr
 
 The entry point of the implementation sources must extend the class _`org.bonitasoft.engine.filter.AbstractUserFilter`_.
 
-### Build an actor filter project
+### Add multiple implementations
 
-To build project, type the following command at the root of the project : 
+To add a new implementation create a `.impl` file in the `src/main/resources-filtered/` folder. They will be added to `all` zip archive at build time. It is recommended to use the maven properties for definition id and version.
+
+If you want to build a single zip assembly containing a specific implementation (that can be installed on a Bonita runtime using the Admin Portal app), you must create a new assembly file in the `src/assembly` folder. This assembly must use an id that match the implementation id and include the proper `.impl` file. You can use the generated `impl` assembly as an example.
+
+### Build the project
+
+To build the project by typing the following command at the root of the project:
+ 
 ```
 ./mvnw clean install
 ```
 
-##### Before 7.13.0 (2021.2)
+This project is built using Maven, and especially the [maven assembly plugin](https://maven.apache.org/plugins/maven-assembly-plugin/).
 
-This project is built using Maven, and especially the [maven assembly plugin](https://maven.apache.org/plugins/maven-assembly-plugin/).   
+#### Before 7.13.0 (2021.2)
 
-By default, a zip archives is built containing all the definitions and implementations found in the project.
-By importing this archive in a Bonita Studio you will import all the definitions and implementations created in the project
+The default build output is:
+*  `target/[artifact id]-[artifact version]-all.zip` : By importing this archive in a Bonita Studio  (pre 2021.2) you will import all the definitions and implementations created in the project.
+*  `target/[artifact id]-[artifact version]-impl.zip` : An archive containing a single implementation that can be installed using the Admin Portal app
 
-The built archive can be found in here `target/[artifact id]-[artifact version].zip` after the build.
+#### Since 7.13.0 (2021.2)
 
-##### Since 7.13.0 (2021.2)
+Now that the Bonita project is a Maven project, the `all` assembly is not used anymore. You can just add this actor filter as an extension in your Bonita project. Either using its Maven coordinates (be careful that the artifact must be published on a remote repository in order to be consumed) or by importing the built archive `target/[artifact id]-[artifact version].jar` using the Studio extension view.
 
-Now that the Bonita project is a Maven project, the assembly is not used anymore. You can just add this actor filter as dependency in your Bonita project. Either using its Maven coordinates (be careful that the artifact must be published on a remote repository in order to be consumed) or by importing the built archive `target/[artifact id]-[artifact version].jar` using the Studio extension view.
+The default build output is:
+*  `target/[artifact id]-[artifact version].jar` : A java archive that can be imported in a Studio (since 2021.2)
+*  `target/[artifact id]-[artifact version]-impl.zip` : An archive that can be installed using the Admin Portal app
