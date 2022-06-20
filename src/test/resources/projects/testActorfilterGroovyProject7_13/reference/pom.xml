@@ -23,20 +23,20 @@
                 
         <!-- Bonita -->
         <bonita-runtime.version>7.13.0</bonita-runtime.version>
-        <groovy.version>3.0.7</groovy.version>
         
         <!-- Test -->
-        <spock-core.version>2.0-M5-groovy-3.0</spock-core.version>
+        <spock-core.version>2.1-groovy-3.0</spock-core.version>
         <byte-buddy.version>1.11.5</byte-buddy.version>
-        <logback-classic.version>1.2.3</logback-classic.version>
+        <logback-classic.version>1.2.11</logback-classic.version>
         
         <!-- Maven plugins -->
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
         <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
+        <groovy-xml.version>3.0.11</groovy-xml.version>
         <groovy-eclipse-compiler.version>3.7.0</groovy-eclipse-compiler.version>
         <groovy-eclipse-batch.version>3.0.8-01</groovy-eclipse-batch.version>
     </properties>
@@ -63,7 +63,6 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>${groovy.version}</version>
             <scope>provided</scope>
         </dependency>
         <!-- You may add more Groovy modules if required, see https://groovy-lang.org/documentation.html#groovymoduleguides -->
@@ -155,7 +154,7 @@
                         <dependency>
                             <groupId>org.codehaus.groovy</groupId>
                             <artifactId>groovy-xml</artifactId>
-                            <version>3.0.8</version>
+                            <version>${groovy-xml.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
