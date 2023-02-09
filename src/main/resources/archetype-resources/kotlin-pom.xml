@@ -11,7 +11,7 @@
     
     <properties>
         <!-- Maven -->
-        <kotlin.version>1.5.20</kotlin.version>
+        <kotlin.version>1.8.10</kotlin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -26,15 +26,15 @@
         <bonita-runtime.version>${bonitaVersion}</bonita-runtime.version>
 
         <!-- Tests -->
-        <junit-jupiter-engine.version>5.7.2</junit-jupiter-engine.version>
-        <assertj-core.version>3.20.2</assertj-core.version>
-        <mockk.version>1.12.0</mockk.version>
-        <logback-classic.version>1.2.3</logback-classic.version>
+        <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
+        <assertj-core.version>3.24.2</assertj-core.version>
+        <mockk.version>1.13.4</mockk.version>
+        <logback-classic.version>1.2.11</logback-classic.version>
 
         <!-- Maven plugins -->
-        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
         <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M8</maven-surefire-plugin.version>
     </properties>
 
 #if( $after713 )    <dependencyManagement>
@@ -83,7 +83,7 @@
         </dependency>
         <dependency>
             <groupId>io.mockk</groupId>
-            <artifactId>mockk</artifactId>
+            <artifactId>mockk-jvm</artifactId>
             <version>${mockk.version}</version>
             <scope>test</scope>
         </dependency>
