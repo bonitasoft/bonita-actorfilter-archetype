@@ -13,4 +13,4 @@ builder.jarDependencies {
             }
 }
 def deps = xml.toString()
-project.properties.setProperty("connector-dependencies", deps)
+project.properties.setProperty("impl-dependencies", deps)
