@@ -34,7 +34,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven-archetype-version>3.1.2</maven-archetype-version>
     <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
   </properties>
  
   <build>
@@ -94,7 +94,7 @@
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>
