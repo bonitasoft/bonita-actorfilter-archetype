@@ -10,12 +10,12 @@
 :sectanchors:
 :linkcss: false
 
-:short-bonita-version: 7.13
+:short-bonita-version: 10.0
 :doc-url: https://documentation.bonitasoft.com/bonita/{short-bonita-version}
-:java-version: 11
-= actorfilter-java-test
+:java-version: 17
+= actorfilter-groovy-test
 
-The project **actorfilter-java-test** is a Bonita Actor Filter for **Bonita {short-bonita-version}**  **Community** version written in `java` language.
+The project **actorfilter-groovy-test** is a Bonita Actor Filter for **Bonita {short-bonita-version}**  **Community** version written in `groovy` language.
 
 _**TODO**_: A brief description of your project, what it is used for and how does life get
 awesome when someone starts to use it.
@@ -51,12 +51,12 @@ project after some code changes, state them here:
 
 [source,bash]
 ----
-git clone https://your.github.com/actorfilter-java-test.git
-cd actorfilter-java-test/
+git clone https://your.github.com/actorfilter-groovy-test.git
+cd actorfilter-groovy-test/
 mvn package
 ----
 
-The build should produce a jar archive under the `target/` folder named `actorfilter-java-test-1.0.0.jar`
+The build should produce a jar archive under the `target/` folder named `actorfilter-groovy-test-1.0.0.jar`
 
 _**TODO**_: Here again you should state what actually happens when the code above gets
 executed.
