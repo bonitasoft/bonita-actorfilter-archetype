@@ -39,7 +39,7 @@ jobs:
   test:
     strategy:
       matrix:
-        platform: [ubuntu-22.04, macos-12, windows-2022]
+        platform: [ubuntu-22.04, macos-14, windows-2022]
         language: [java, kotlin, groovy]
     runs-on: ${{ matrix.platform }}
     needs: build
