@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - master
+      - support/*
   pull_request:
     branches:
       - master
+      - support/*
 
 jobs:
 
@@ -54,7 +56,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        platform: [ ubuntu-22.04, macos-14, windows-2022 ]
+        platform: [ ubuntu-24.04, macos-15, windows-2025 ]
         language: [ java, kotlin, groovy ]
     runs-on: ${{ matrix.platform }}
     steps:
