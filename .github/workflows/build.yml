@@ -27,6 +27,12 @@ jobs:
           distribution: temurin
           cache: maven
 
+      # TODO Bonita 12.0 GA: remove this step once Bonita 12.0 is released on Maven Central (only needed to resolve runtime snapshots)
+      - name: Setup Maven settings
+        uses: bonitasoft/maven-settings-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
       - name: Get archetype version
         id: get-app-version
         run: |
@@ -34,7 +40,19 @@ jobs:
           echo "APP_VERSION=$extracted_version" >> $GITHUB_OUTPUT
 
       - name: Build and test archetype
-        run: ./mvnw -B -ntp verify
+        run: ./mvnw -B -ntp install
+
+      - name: Run Integration tests for java archetype sub-modules
+        run: ./mvnw -B -ntp groovy:execute -Dsource=target/test-classes/testJavaSubModuleProject/IT.groovy -Dscope=test
+
+      - name: Run Integration tests for groovy archetype sub-modules
+        run: ./mvnw -B -ntp groovy:execute -Dsource=target/test-classes/testGroovySubModuleProject/IT.groovy -Dscope=test
+
+      - name: Run Integration tests for kotlin archetype sub-modules
+        run: ./mvnw -B -ntp groovy:execute -Dsource=target/test-classes/testKotlinSubModuleProject/IT.groovy -Dscope=test
+
+      - name: Run Integration test for unsupported Bonita version rejection
+        run: ./mvnw -B -ntp groovy:execute -Dsource=target/test-classes/testInvalidBonitaVersion/IT.groovy -Dscope=test
 
       - name: Upload archetype for tests
         uses: actions/upload-artifact@v7
@@ -79,6 +97,12 @@ jobs:
           java-version: 17
           distribution: temurin
 
+      # TODO Bonita 12.0 GA: remove this step once Bonita 12.0 is released on Maven Central (only needed to resolve runtime snapshots)
+      - name: Setup Maven settings
+        uses: bonitasoft/maven-settings-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
       - name: Cache Maven repository
         uses: actions/cache@v6
         with:
@@ -92,6 +116,7 @@ jobs:
           mvn -B -ntp install:install-file -Dfile=bonita-actorfilter-archetype-${{needs.build.outputs.app_version}}.jar -DpomFile=pom.xml
           rm pom.xml
 
+      # TODO Bonita 12.0 GA: switch -DbonitaVersion to 12.0.0
       - name: Generate project and build it
         shell: bash
         run: >-
@@ -103,7 +128,7 @@ jobs:
           -DartifactId=test-actorfilter-${{ matrix.language }}
           -Dversion=1.0.0-SNAPSHOT
           -Dpackage=org.bonita.test.actorfilter
-          -DbonitaVersion=7.10.0
+          -DbonitaVersion=12.0-SNAPSHOT
           -DclassName=MyTestActorFilter
           -Dlanguage=${{ matrix.language }}
 

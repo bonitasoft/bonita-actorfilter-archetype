@@ -1,61 +1,85 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.bonitasoft.archetypes</groupId>
-  <artifactId>bonita-actorfilter-archetype</artifactId>
-  <version>1.2.1-SNAPSHOT</version>
-  <packaging>maven-archetype</packaging>
-  
-  <name>Bonita Actorfilter Archetype</name>
-  <description>Maven archetype to bootstrap a Bonita actor filter project</description>
-  <url>https://www.bonitasoft.com</url>
-  
-  <developers>
-      <developer>
-          <id>bonitasoft</id>
-          <name>Bonitasoft</name>
-          <email>rd.user@bonitasoft.com</email>
-          <organization>Bonitasoft</organization>
-          <organizationUrl>https://www.bonitasoft.com</organizationUrl>
-      </developer>
-  </developers>
-  
-  <licenses>
-    <license>
-      <name>GPL-v2.0</name>
-      <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
-    </license>
-  </licenses>
-  
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven-archetype-version>3.4.1</maven-archetype-version>
-    <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
-    <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-  </properties>
- 
-  <build>
+    <groupId>org.bonitasoft.archetypes</groupId>
+    <artifactId>bonita-actorfilter-archetype</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <packaging>maven-archetype</packaging>
+
+    <name>Bonita Actorfilter Archetype</name>
+    <description>Maven archetype to bootstrap a Bonita actor filter project</description>
+    <url>https://www.bonitasoft.com</url>
+
+    <developers>
+        <developer>
+            <id>bonitasoft</id>
+            <name>Bonitasoft</name>
+            <email>rd.user@bonitasoft.com</email>
+            <organization>Bonitasoft</organization>
+            <organizationUrl>https://www.bonitasoft.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>GPL-v2.0</name>
+            <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Maven plugins -->
+        <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
+        <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
+        <maven-archetype.version>3.4.1</maven-archetype.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+    </properties>
+
+    <build>
+        <testResources>
+            <testResource>
+                <directory>${project.basedir}/src/test/resources</directory>
+                <filtering>false</filtering>
+            </testResource>
+            <testResource>
+                <directory>${project.basedir}/src/test/resources-filtered</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
         <extensions>
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
                 <artifactId>archetype-packaging</artifactId>
-                <version>${maven-archetype-version}</version>
+                <version>${maven-archetype.version}</version>
             </extension>
-        </extensions> 
-    
+        </extensions>
+
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-archetype-plugin</artifactId>
-                    <version>${maven-archetype-version}</version>
+                    <version>${maven-archetype.version}</version>
+                </plugin>
+                <!-- Used to run the script integration tests (see CONTRIBUTING.md) -->
+                <plugin>
+                    <groupId>org.codehaus.gmaven</groupId>
+                    <artifactId>groovy-maven-plugin</artifactId>
+                    <version>${groovy-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
-    
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -84,45 +108,45 @@
                 </configuration>
             </plugin>
         </plugins>
-  </build>
-  
+    </build>
+
     <profiles>
-    <!-- Deployment profile (required so these plugins are only used when deploying) -->
-    <profile>
-      <id>deploy</id>
-      <build>
-        <plugins>
-          <!-- GPG plugin -->
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-gpg-plugin</artifactId>
-              <version>${maven-gpg-plugin.version}</version>
-              <executions>
-                  <execution>
-                      <id>sign-artifacts</id>
-                      <phase>verify</phase>
-                      <goals>
-                          <goal>sign</goal>
-                      </goals>
-                      <configuration>
-                          <!-- Prevent `gpg` from using pinentry programs -->
-                          <gpgArguments>
-                              <arg>--pinentry-mode</arg>
-                              <arg>loopback</arg>
-                          </gpgArguments>
-                      </configuration>
-                  </execution>
-              </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-  
-  <scm>
-    <developerConnection>scm:git:git@github.com:bonitasoft/bonita-actorfilter-archetype.git</developerConnection>
-    <connection>scm:git:git@github.com:bonitasoft/bonita-actorfilter-archetype.git</connection>
-    <url>https://github.com/bonitasoft/bonita-actorfilter-archetype</url>
-    <tag>HEAD</tag>
-  </scm>
+        <!-- Deployment profile (required so these plugins are only used when deploying) -->
+        <profile>
+            <id>deploy</id>
+            <build>
+                <plugins>
+                    <!-- GPG plugin -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- Prevent `gpg` from using pinentry programs -->
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <scm>
+        <developerConnection>scm:git:git@github.com:bonitasoft/bonita-actorfilter-archetype.git</developerConnection>
+        <connection>scm:git:git@github.com:bonitasoft/bonita-actorfilter-archetype.git</connection>
+        <url>https://github.com/bonitasoft/bonita-actorfilter-archetype</url>
+        <tag>HEAD</tag>
+    </scm>
 </project>

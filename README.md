@@ -1,15 +1,18 @@
-[![Actions Status](https://github.com/bonitasoft/bonita-actorfilter-archetype/workflows/Build/badge.svg)](https://github.com/bonitasoft/bonita-actorfilter-archetype/actions?query=workflow%3ABuild)
+[![Actions Status](https://github.com/bonitasoft/bonita-actorfilter-archetype/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/bonitasoft/bonita-actorfilter-archetype/actions/workflows/build.yml)
 [![GitHub release](https://img.shields.io/github/v/release/bonitasoft/bonita-actorfilter-archetype?color=blue&label=Release&include_prereleases)](https://github.com/bonitasoft/bonita-actorfilter-archetype/releases)
-[![Maven Central](https://img.shields.io/maven-central/v/org.bonitasoft.archetypes/bonita-actorfilter-archetype.svg?label=Maven%20Central&color=orange)](https://search.maven.org/search?q=g:%22org.bonitasoft.archetypes%22%20AND%20a:%22bonita-actorfilter-archetype%22)
+[![Maven Central](https://img.shields.io/maven-central/v/org.bonitasoft.archetypes/bonita-actorfilter-archetype?label=Maven%20Central&color=orange)](https://central.sonatype.com/artifact/org.bonitasoft.archetypes/bonita-actorfilter-archetype)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-yellow.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 # Bonita Actor filter Archetype
 
 This project contains a maven archetype, which allow to easily setup a Bonita actor filter project.
 
-## Setup an extension project using the archetype 
+## Disclaimer
 
-⚠️ **Java 11 is required for Bonita 7.13+**
+* Compatible with Bonita 12.0+ (Jakarta EE). Requires a JDK 17 or higher.
+* For Bonita 7.10 to 11.x, use the archetype **1.2.x** (maintained on the [`support/1.2.x`](https://github.com/bonitasoft/bonita-actorfilter-archetype/tree/support/1.2.x) branch)
+
+## Setup an extension project using the archetype 
 
  You can setup a Bonita actor filter project using the following command, from a terminal: 
  
@@ -31,7 +34,7 @@ You'll then have to specify interactively the properties of your project:
 	- Example: _my-actor-filter_
 - **version:** the version of your actor filter _(default value: 1.0-SNAPSHOT)_
 - **package** the package in which the actor filter source files will be created _(default value: the group id of the actor filter)_
-- **bonitaVersion:** the targeted Bonita version
+- **bonitaVersion:** the targeted Bonita version (12.0 or above)
 - **className:** the class name of your actor filter 
     - Must match the following regex: `^[a-zA-Z_$][a-zA-Z\d_$]+$` (A Java classname valid identifier)
     - Example: _MyActorfilter1_
@@ -45,7 +48,7 @@ You'll then have to specify interactively the properties of your project:
 
 A folder named _[your artifact id]_ is created, with your Bonita actor filter project, ready to use.
 
-⚠️ You can avoid the interactive mode by specifying all properties of your project directly in the command line, but by doing that you'll bypass the validation performed on the properties content.
+⚠️ You can avoid the interactive mode by specifying all properties of your project directly in the command line, but by doing that you'll bypass most of the validation performed on the properties content (the minimum Bonita version is still enforced).
 
 ## Building the archetype
 The archetype can be installed in your local maven repository.
