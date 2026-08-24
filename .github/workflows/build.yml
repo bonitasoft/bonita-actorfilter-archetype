@@ -29,7 +29,7 @@ jobs:
 
       # TODO Bonita 12.0 GA: remove this step once Bonita 12.0 is released on Maven Central (only needed to resolve runtime snapshots)
       - name: Setup Maven settings
-        uses: bonitasoft/maven-settings-action@v1
+        uses: bonitasoft/maven-settings-action@v2
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 
@@ -99,7 +99,7 @@ jobs:
 
       # TODO Bonita 12.0 GA: remove this step once Bonita 12.0 is released on Maven Central (only needed to resolve runtime snapshots)
       - name: Setup Maven settings
-        uses: bonitasoft/maven-settings-action@v1
+        uses: bonitasoft/maven-settings-action@v2
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 
