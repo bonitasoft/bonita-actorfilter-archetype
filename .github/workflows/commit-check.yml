@@ -21,6 +21,7 @@ jobs:
       - uses: commit-check/commit-check-action@v2
         env:
           CCHK_IGNORE_AUTHORS: "dependabot[bot]"
+          CCHK_SUBJECT_MAX_LENGTH: 120
         with:
           message: true
           branch: false
