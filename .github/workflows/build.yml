@@ -48,19 +48,8 @@ jobs:
           echo "APP_VERSION=$extracted_version" >> $GITHUB_OUTPUT
 
       - name: Build and test archetype
-        run: ./mvnw -B -ntp install
-
-      - name: Run Integration tests for java archetype sub-modules
-        run: ./mvnw -B -ntp groovy:execute -Dsource=target/test-classes/testJavaSubModuleProject/IT.groovy -Dscope=test
-
-      - name: Run Integration tests for groovy archetype sub-modules
-        run: ./mvnw -B -ntp groovy:execute -Dsource=target/test-classes/testGroovySubModuleProject/IT.groovy -Dscope=test
-
-      - name: Run Integration tests for kotlin archetype sub-modules
-        run: ./mvnw -B -ntp groovy:execute -Dsource=target/test-classes/testKotlinSubModuleProject/IT.groovy -Dscope=test
-
-      - name: Run Integration test for unsupported Bonita version rejection
-        run: ./mvnw -B -ntp groovy:execute -Dsource=target/test-classes/testInvalidBonitaVersion/IT.groovy -Dscope=test
+        # IT profile also runs the post-generation script integration tests
+        run: ./mvnw -B -ntp -PIT install
 
       - name: Upload archetype for tests
         uses: actions/upload-artifact@v7
