@@ -63,6 +63,9 @@ def modulePomFile = new File("${parentFolder}/${moduleArtifactId}/pom.xml")
 def modulePom = modulePomFile.text
 assert modulePom.count('${kotlin.version}') == 1: 'Only the kotlin-stdlib dependency should still reference ${kotlin.version}'
 assert modulePom =~ /<kotlin\.version>[^<]+<\/kotlin\.version>/: 'kotlin.version property should be kept: kotlin-stdlib still references it'
+// Also catches a pin the cleanup would resolve to a literal version instead of removing, which the
+// count above cannot see
+assert !(modulePom =~ /<artifactId>kotlin-maven-plugin<\/artifactId>\s*<version>/): 'The kotlin-maven-plugin version pin should be removed: the parent manages it'
 
 def referencePomFile = new File("${testPath}/reference/pom.xml")
 assert referencePomFile.text == modulePom: 'Reference pom and project pom should have the same content'
