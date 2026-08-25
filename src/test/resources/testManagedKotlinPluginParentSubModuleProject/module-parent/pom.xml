@@ -55,8 +55,9 @@
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${maven-assembly-plugin.version}</version>
                 </plugin>
-                <!-- The generated kotlin module shares ${kotlin.version} between this plugin and
-                     its kotlin-stdlib dependency: dropping the pin must not drop the property -->
+                <!-- Pinned on purpose, so that the generated module drops its own pin. Declaring
+                     kotlin.version here would let the module inherit it, and the suite's
+                     'mvn validate' step would pass with the property wrongly removed -->
                 <plugin>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-maven-plugin</artifactId>
