@@ -15,6 +15,7 @@
     <impl-main-class>com.company.bonitasoft.MyActorfilter</impl-main-class>
     <impl-id>${definition-id}-impl</impl-id>
     <kotlin.version>2.4.10</kotlin.version>
+    <java.version>17</java.version>
     <kotlin.compiler.jvmTarget>${java.version}</kotlin.compiler.jvmTarget>
     <impl-version>${project.version}</impl-version>
     <assertj-core.version>3.27.7</assertj-core.version>

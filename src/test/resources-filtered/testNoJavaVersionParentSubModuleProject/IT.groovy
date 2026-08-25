@@ -2,17 +2,17 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 
-// Run 'mvn install' first and then 'mvn groovy:execute -Dsource=target/test-classes/testJavaSubModuleProject/IT.groovy -Dscope=test' from project root
+// Run 'mvn install' first and then 'mvn groovy:execute -Dsource=target/test-classes/testNoJavaVersionParentSubModuleProject/IT.groovy -Dscope=test' from project root
 
 // Given
-def sourcePath = '${project.basedir}/src/test/resources/testJavaSubModuleProject/'
-def testPath = '${project.build.testOutputDirectory}/testJavaSubModuleProject/'
+def sourcePath = '${project.basedir}/src/test/resources/testNoJavaVersionParentSubModuleProject/'
+def testPath = '${project.build.testOutputDirectory}/testNoJavaVersionParentSubModuleProject/'
 def sourceParentFolder = "${sourcePath}/module-parent"
 def parentFolder = "${testPath}/module-parent"
 def moduleArtifactId = "my-actorfilter"
 
 
-println "[Integration Test] Test generation of sub module ${moduleArtifactId} in folder ${parentFolder}"
+println "[Integration Test] Test generation of kotlin sub module ${moduleArtifactId} under a parent managing the Bonita runtime but not java.version, in folder ${parentFolder}"
 
 // Delete previous run if any
 def moduleFolder = new File("${parentFolder}/${moduleArtifactId}")
@@ -35,7 +35,7 @@ def proc = """mvn archetype:generate -B -ntp \
     -Dversion=0.0.1-SNAPSHOT \
     -Dpackage=com.company.bonitasoft \
     -DclassName=MyActorfilter \
-    -Dlanguage=java \
+    -Dlanguage=kotlin \
     -DbonitaVersion=12.0-SNAPSHOT \
     -Dwrapper=false
 """.execute(null, new File(parentFolder))
@@ -51,7 +51,11 @@ assert proc.exitValue() == 0: "Maven archetype execution exit code should be 0"
 def parentPomFile = new File("${parentFolder}/pom.xml")
 assert parentPomFile.text.contains("<module>${moduleArtifactId}</module>"): 'Parent pom should declare project as sub module'
 
+// The module must keep its own java.version: no ancestor defines it, and the kotlin
+// kotlin.compiler.jvmTarget property would otherwise reference an unresolvable property
 def modulePomFile = new File("${parentFolder}/${moduleArtifactId}/pom.xml")
+assert modulePomFile.text.contains("<java.version>"): 'Module pom should keep the java.version property'
+
 def referencePomFile = new File("${testPath}/reference/pom.xml")
 assert referencePomFile.text == modulePomFile.text: 'Reference pom and project pom should have the same content'
 

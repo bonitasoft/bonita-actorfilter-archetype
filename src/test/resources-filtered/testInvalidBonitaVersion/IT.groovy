@@ -23,8 +23,12 @@ def proc = """mvn archetype:generate -B -ntp \
     -DbonitaVersion=11.1.0 \
     -Dwrapper=false
 """.execute(null, testFolder)
-proc.consumeProcessOutput(sout, serr)
+def soutThread = proc.consumeProcessOutputStream(sout)
+def serrThread = proc.consumeProcessErrorStream(serr)
 proc.waitForOrKill(10 * 60 * 1000)
+// Join the output pump threads so the content assertion below reads a fully drained buffer
+soutThread.join(60 * 1000)
+serrThread.join(60 * 1000)
 println "out> $sout\nerr> $serr"
 
 // Then

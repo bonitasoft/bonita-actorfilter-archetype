@@ -17,7 +17,6 @@ println "[Integration Test] Test generation of sub module ${moduleArtifactId} in
 // Delete previous run if any
 def moduleFolder = new File("${parentFolder}/${moduleArtifactId}")
 if (moduleFolder.exists()) {
-    Files.deleteIfExists(Paths.get("${parentFolder}/${moduleArtifactId}/pom.xml"))
     moduleFolder.deleteDir()
     // Reset the parent pom (without sub-module declaration)
     Files.copy(Paths.get("${sourceParentFolder}/pom.xml"), Paths.get("${parentFolder}/pom.xml"), StandardCopyOption.REPLACE_EXISTING);
