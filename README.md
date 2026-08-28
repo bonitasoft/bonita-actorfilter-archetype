@@ -78,14 +78,10 @@ So, to release a new version of the project, you have to:
 - Open the [Release workflow](https://github.com/bonitasoft/bonita-actorfilter-archetype/actions/workflows/release.yml) and click *Run workflow*
 - Fill in the version to release (e.g. `1.2.1`) and the next development version (e.g. `1.2.2-SNAPSHOT`)
 - Leave the `branch` input to `master`, unless you want to release from another branch
+- Leave the `auto-publish` input unchecked to review the deployment before publishing it, or check it to publish to Maven Central automatically
 
-⚠️ The release is performed on the branch given by the `branch` input, not on the branch selected in the *Run workflow* dropdown (which only selects the version of the workflow file to run): that branch is the one checked out and built, tagged with the released version, and updated with the next development version.
+### ⚠️ Important notes
 
-⚠️ The deployment is not published automatically (`autoPublish` is set to `false` in the `pom.xml`): once the workflow succeeds, the deployment must be reviewed and published from the [Maven Central Portal](https://central.sonatype.com/publishing/deployments).
-
-⚠️ Nothing is pushed until the deployment succeeded: the release commit, the next development version commit and the tag are all pushed in one go, near the end of the workflow. A run that fails before that step leaves the branch and the tags untouched, but the deployment may already exist in the Maven Central Portal.
-
-⚠️ Make sure the version is final before running the workflow. If you have to fix something afterwards, then you must first:
-- Delete the tag and the release on GitHub
-- Revert the release and next development version commits on the branch
-- Drop the deployment from our Maven Central Portal repository
+- **Branch**: the release is performed on the branch given by the `branch` input, not on the branch selected in the *Run workflow* dropdown (which only selects the version of the workflow file to run). That branch is the one checked out and built, tagged with the released version, and updated with the next development version.
+- **Publication**: by default the deployment is not published automatically (`auto-publish` unchecked, i.e. `-DautoPublish=false` for the `central-publishing-maven-plugin`). Once the workflow succeeds, the deployment must be reviewed and published from the [Maven Central Portal](https://central.sonatype.com/publishing/deployments). With `auto-publish` checked, it is published as soon as it passes the Central Portal validation, and a published version can no longer be removed.
+- **Push**: nothing is pushed until the deployment succeeded. The release commit, the next development version commit and the tag are all pushed in one go, near the end of the workflow. A run that fails before that step leaves the branch and the tags untouched, but the deployment may already exist in the Maven Central Portal.
